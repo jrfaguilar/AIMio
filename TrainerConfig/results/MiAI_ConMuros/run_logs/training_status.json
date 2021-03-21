@@ -1,0 +1,35 @@
+{
+    "MovementBehaviour": {
+        "checkpoints": [
+            {
+                "steps": 108496,
+                "file_path": "results\\MiAI_ConMuros\\MovementBehaviour\\MovementBehaviour-108496.onnx",
+                "reward": null,
+                "creation_time": 1616257054.8764365
+            },
+            {
+                "steps": 499944,
+                "file_path": "results\\MiAI_ConMuros\\MovementBehaviour\\MovementBehaviour-499944.onnx",
+                "reward": 333.0540288090706,
+                "creation_time": 1616268711.1900215
+            },
+            {
+                "steps": 500008,
+                "file_path": "results\\MiAI_ConMuros\\MovementBehaviour\\MovementBehaviour-500008.onnx",
+                "reward": 333.0540288090706,
+                "creation_time": 1616268711.3539684
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 500008,
+            "file_path": "results\\MiAI_ConMuros\\MovementBehaviour.onnx",
+            "reward": 333.0540288090706,
+            "creation_time": 1616268711.3539684
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.2.0",
+        "mlagents_version": "0.25.0",
+        "torch_version": "1.6.0"
+    }
+}

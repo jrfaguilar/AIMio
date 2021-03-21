@@ -1,0 +1,29 @@
+{
+    "MovementBehaviour": {
+        "checkpoints": [
+            {
+                "steps": 499954,
+                "file_path": "results\\MiAI_sinrecompensa\\MovementBehaviour\\MovementBehaviour-499954.onnx",
+                "reward": null,
+                "creation_time": 1616240517.2247796
+            },
+            {
+                "steps": 500018,
+                "file_path": "results\\MiAI_sinrecompensa\\MovementBehaviour\\MovementBehaviour-500018.onnx",
+                "reward": null,
+                "creation_time": 1616240517.3687336
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 500018,
+            "file_path": "results\\MiAI_sinrecompensa\\MovementBehaviour.onnx",
+            "reward": null,
+            "creation_time": 1616240517.3687336
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.2.0",
+        "mlagents_version": "0.25.0",
+        "torch_version": "1.6.0"
+    }
+}

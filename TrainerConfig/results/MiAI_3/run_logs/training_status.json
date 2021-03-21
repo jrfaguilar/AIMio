@@ -1,0 +1,35 @@
+{
+    "MovementBehaviour": {
+        "checkpoints": [
+            {
+                "steps": 78801,
+                "file_path": "results\\MiAI_3\\MovementBehaviour\\MovementBehaviour-78801.onnx",
+                "reward": 73.24641698066678,
+                "creation_time": 1616195383.27736
+            },
+            {
+                "steps": 86192,
+                "file_path": "results\\MiAI_3\\MovementBehaviour\\MovementBehaviour-86192.onnx",
+                "reward": 105.64197233319283,
+                "creation_time": 1616235211.1053398
+            },
+            {
+                "steps": 385087,
+                "file_path": "results\\MiAI_3\\MovementBehaviour\\MovementBehaviour-385087.onnx",
+                "reward": null,
+                "creation_time": 1616237169.3047066
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 385087,
+            "file_path": "results\\MiAI_3\\MovementBehaviour.onnx",
+            "reward": null,
+            "creation_time": 1616237169.3047066
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.2.0",
+        "mlagents_version": "0.25.0",
+        "torch_version": "1.6.0"
+    }
+}

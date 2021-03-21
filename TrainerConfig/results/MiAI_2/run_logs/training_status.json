@@ -1,0 +1,23 @@
+{
+    "MovementBehaviour": {
+        "checkpoints": [
+            {
+                "steps": 309209,
+                "file_path": "results\\MiAI_2\\MovementBehaviour\\MovementBehaviour-309209.onnx",
+                "reward": null,
+                "creation_time": 1616183558.98191
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 309209,
+            "file_path": "results\\MiAI_2\\MovementBehaviour.onnx",
+            "reward": null,
+            "creation_time": 1616183558.98191
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.2.0",
+        "mlagents_version": "0.25.0",
+        "torch_version": "1.6.0"
+    }
+}
