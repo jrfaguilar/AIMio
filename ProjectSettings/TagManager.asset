@@ -6,8 +6,7 @@ TagManager:
   tags:
   - Tablero
   - IA
-  - ScoreIA
-  - ScorePlayer
+  - Score
   layers:
   - Default
   - TransparentFX

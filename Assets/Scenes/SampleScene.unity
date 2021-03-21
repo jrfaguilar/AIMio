@@ -658,6 +658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 901d9df0e5755e547a8642e5f809c48e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ScoreValue: 0
   PlayerName: Player
 --- !u!114 &578546221
 MonoBehaviour:
@@ -5724,6 +5725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 901d9df0e5755e547a8642e5f809c48e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ScoreValue: 0
   PlayerName: IA
 --- !u!114 &2085736208
 MonoBehaviour:

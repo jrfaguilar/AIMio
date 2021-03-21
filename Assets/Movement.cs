@@ -10,6 +10,7 @@ public class Movement : Agent
 {
     public float m_Speed = 12f;                 // How fast the tank moves forward and back.
     public float m_TurnSpeed = 0.001f;            // How fast the tank turns in degrees per second.
+    public bool isPlayer = false;
 
 
     private string m_MovementAxisName;          // The name of the input axis for moving forward and back.
@@ -26,11 +27,8 @@ public class Movement : Agent
     private Rigidbody2D m_Tank_Rb;              // Reference used to move the tank.
     private Rigidbody2D m_Cofre_Rb;
 
-    private ScoreScript scoreIA;
-    private ScoreScript scorePlayer;
+    private GameObject score;
 
-
-    //public GameObject aceituna;
 
     public override void Initialize()
     {
@@ -40,11 +38,17 @@ public class Movement : Agent
         initialPosition = transform.position;
         distanceToFinishInitial = Vector2.Distance(m_Tank_Rb.transform.position, m_Cofre_Rb.transform.position);
         tamanioTablero = GameObject.FindGameObjectWithTag("Tablero").transform.localScale;
+
+        if (isPlayer)
+        {
+            score = GameObject.Find("ScoreTextPlayer");
+        }
+        else
+        {
+            score = GameObject.Find("ScoreTextIA");
+        }
         //m_ResetParams = Academy.Instance.EnvironmentParameters;
         //SetResetParameters();
-
-        scoreIA = GameObject.FindGameObjectWithTag("ScoreIA").GetComponent<ScoreScript>();
-        scorePlayer = GameObject.FindGameObjectWithTag("ScorePlayer").GetComponent<ScoreScript>();
     }
 
     // Start is called before the first frame update
@@ -80,8 +84,7 @@ public class Movement : Agent
         if (collision.collider.tag == "Finish")
         {
             AddReward(5.0f);
-            
-            //ScoreScript.ScoreValue += 1;
+            score.GetComponent<ScoreScript>().ScoreValue += 1;
             ResetPosition(false);
         }
         else
@@ -102,8 +105,7 @@ public class Movement : Agent
         Debug.Log("scape");
         AddReward(-1.0f);
         Debug.Log(GetCumulativeReward());
-        scoreIA.ScoreValue = 0;
-        scorePlayer.ScoreValue = 0;
+        score.GetComponent<ScoreScript>().ScoreValue = 0;
         EndEpisode();
     }
 
