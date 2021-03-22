@@ -167,7 +167,7 @@ public class Movement : Agent
     }
 
 
-    #region ML Agent methods
+ #region ML Agent methods
 
     public override void CollectObservations(VectorSensor sensor)
     {
