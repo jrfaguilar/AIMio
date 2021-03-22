@@ -109,6 +109,63 @@ public class Movement : Agent
         EndEpisode();
     }
 
+    private void ResetPosition(bool derrota)
+    {
+        //Reset Enviroment
+        Vector3 nuevaPosicion;
+        Collider2D colisionesConMuros;
+        if (derrota)
+        {
+            transform.position = initialPosition;
+        }
+        m_Tank_Rb.velocity = Vector2.zero;
+        //Muevo el cuadrado a una posicion aleatoria que no sea ocupada por un muro.
+        do
+        {
+            nuevaPosicion = new Vector3(Random.Range(-(tamanioTablero.x / 2) + 0.1f, (tamanioTablero.x / 2) - 0.1f), Random.Range(-(tamanioTablero.y / 2) + 0.1f, (tamanioTablero.y / 2) - 0.1f), tamanioTablero.z);
+            //Vemos si colisiona con alguno de los muros (capa 6)*
+            colisionesConMuros = Physics2D.OverlapBox(new Vector2(nuevaPosicion.x, nuevaPosicion.y), new Vector2(m_Cofre_Rb.transform.localScale.x, m_Cofre_Rb.transform.localScale.y), 0, LayerMask.GetMask(new string[] { "Walls" }));
+            if (colisionesConMuros != null)
+            {
+                DebugDrawBox(new Vector2(nuevaPosicion.x, nuevaPosicion.y), new Vector2(m_Cofre_Rb.transform.localScale.x, m_Cofre_Rb.transform.localScale.y), 0, Color.green, 1000);
+            }
+        } while (colisionesConMuros != null);
+        m_Cofre_Rb.transform.position = nuevaPosicion;
+        //Actualizo la distancia inicial.
+        distanceToFinishInitial = Vector2.Distance(m_Tank_Rb.transform.position, m_Cofre_Rb.transform.position);
+    }
+
+
+    /// <summary>
+    /// Dibujar en modo debug una caja
+    /// </summary>
+    /// <param name="point"></param>
+    /// <param name="size"></param>
+    /// <param name="angle"></param>
+    /// <param name="color"></param>
+    /// <param name="duration"></param>
+    void DebugDrawBox(Vector2 point, Vector2 size, float angle, Color color, float duration)
+    {
+
+        var orientation = Quaternion.Euler(0, 0, angle);
+
+        // Basis vectors, half the size in each direction from the center.
+        Vector2 right = orientation * Vector2.right * size.x / 2f;
+        Vector2 up = orientation * Vector2.up * size.y / 2f;
+
+        // Four box corners.
+        var topLeft = point + up - right;
+        var topRight = point + up + right;
+        var bottomRight = point - up + right;
+        var bottomLeft = point - up - right;
+
+        // Now we've reduced the problem to drawing lines.
+        Debug.DrawLine(topLeft, topRight, color, duration);
+        Debug.DrawLine(topRight, bottomRight, color, duration);
+        Debug.DrawLine(bottomRight, bottomLeft, color, duration);
+        Debug.DrawLine(bottomLeft, topLeft, color, duration);
+    }
+
 
     #region ML Agent methods
 
@@ -161,36 +218,10 @@ public class Movement : Agent
         ResetPosition(true);
     }
 
-    private void ResetPosition(bool derrota)
-    {
-        //Reset Enviroment
-        Vector3 nuevaPosicion;
-        Collider2D colisionesConMuros;
-        if (derrota)
-        {
-            transform.position = initialPosition;
-        }
-        m_Tank_Rb.velocity = Vector2.zero;
-        //Muevo el cuadrado a una posicion aleatoria que no sea ocupada por un muro.
-        do {
-            nuevaPosicion = new Vector3(Random.Range(-(tamanioTablero.x / 2) + 0.1f, (tamanioTablero.x / 2) - 0.1f), Random.Range(-(tamanioTablero.y / 2) + 0.1f, (tamanioTablero.y / 2) - 0.1f), tamanioTablero.z);
-            //Vemos si colisiona con alguno de los muros (capa 6)*
-            colisionesConMuros = Physics2D.OverlapBox(new Vector2(nuevaPosicion.x,nuevaPosicion.y), new Vector2(m_Cofre_Rb.transform.localScale.x, m_Cofre_Rb.transform.localScale.y),0,LayerMask.GetMask(new string[] { "Walls" }));
-            if(colisionesConMuros != null )
-            {
-                DebugDrawBox(new Vector2(nuevaPosicion.x, nuevaPosicion.y), new Vector2(m_Cofre_Rb.transform.localScale.x, m_Cofre_Rb.transform.localScale.y), 0, Color.green, 1000);
-            }
-            //var cc = Physics2D.OverlapBoxAll(new Vector2(nuevaPosicion.x, nuevaPosicion.y), new Vector2(m_Cuadrado_Rb.transform.localScale.x, m_Cuadrado_Rb.transform.localScale.y), 0);
-        } while (colisionesConMuros != null);
-        m_Cofre_Rb.transform.position = nuevaPosicion;
-        //Actualizo la distancia inicial.
-        distanceToFinishInitial = Vector2.Distance(m_Tank_Rb.transform.position, m_Cofre_Rb.transform.position);
-        //TODO: Mover el cuadrado a una posicion aleatoria del mapa.
-    }
-
-
+    
     /// <summary>
     /// Defino las acciones 0 --> adelante detras y 1 --> izda dcha de forma manual con las teclas.
+    /// Este es el metodo para el input manual de las teclas.
     /// </summary>
     /// <param name="actionsOut"></param>
     public override void Heuristic(float[] actionsOut)
@@ -203,28 +234,5 @@ public class Movement : Agent
     }
 
     #endregion
-
-
-    void DebugDrawBox(Vector2 point, Vector2 size, float angle, Color color, float duration)
-    {
-
-        var orientation = Quaternion.Euler(0, 0, angle);
-
-        // Basis vectors, half the size in each direction from the center.
-        Vector2 right = orientation * Vector2.right * size.x / 2f;
-        Vector2 up = orientation * Vector2.up * size.y / 2f;
-
-        // Four box corners.
-        var topLeft = point + up - right;
-        var topRight = point + up + right;
-        var bottomRight = point - up + right;
-        var bottomLeft = point - up - right;
-
-        // Now we've reduced the problem to drawing lines.
-        Debug.DrawLine(topLeft, topRight, color, duration);
-        Debug.DrawLine(topRight, bottomRight, color, duration);
-        Debug.DrawLine(bottomRight, bottomLeft, color, duration);
-        Debug.DrawLine(bottomLeft, topLeft, color, duration);
-    }
 
 }
